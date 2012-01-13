@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ glob_nom_congres }} - </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="{{ asset('bundles/backcondashboard/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/backcondashboard/css/style.css') }}" rel="stylesheet">
+    
+    <!-- Les scripts -->
+    <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+    <script src="{{ asset('bundles/backcondashboard/js/fonction_core.js') }}" type="text/javascript"></script>
+    <script>
+    var loaderManager = null;
+    $(document).ready(function(){
+    	loaderManager = new myLoader.LoaderAlert({src:'{{ asset('bundles/backcondashboard/images/loader.gif') }}'});
+    });
+    </script>
+	<script src="{{ asset('bundles/backcondashboard/js/bootstrap-datepicker.js') }}"></script>
+	<script src="{{ asset('bundles/backcondashboard/js/bootstrap-modal.js') }}"></script>
+	<script src="{{ asset('bundles/backcondashboard/js/bootstrap-alerts.js') }}"></script>
+	<script src="{{ asset('bundles/backcondashboard/js/bootstrap-twipsy.js') }}"></script>
+	<script src="{{ asset('bundles/backcondashboard/js/bootstrap-popover.js') }}"></script>
+	<script src="{{ asset('bundles/backcondashboard/js/bootstrap-dropdown.js') }}"></script>
+	<script src="{{ asset('bundles/backcondashboard/js/bootstrap-buttons.js') }}"></script>
+	<script src="{{ asset('bundles/backcondashboard/js/jquery.tablesorter.min.js') }}"></script>
+    
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  </head>
+
+  <body>
+
+    {% include 'BackconDashboardBundle::header.html.twig' %}
+
+	<div class="container-fluid">
+		<div class="sidebar">
+		  {% for key, flash in app.session.getFlashes() %}
+		  <div class="alert-message block-message {{ flash }}">
+			<a class="close" href="#">×</a>
+			{{ key }}
+		  </div>
+		{% endfor %}
+	    </div>
+	    <div class="container">
+	      <div class="content">
+	        <div class="page-header">
+	          {% block page_header %}{% endblock %}
+	        </div>
+	        <div class="row">
+	          {% block content %}
+	    	  {% endblock %}
+	        </div>
+	      </div>
+	
+	      <footer>
+	        <p>&copy; Company 2011</p>
+	      </footer>
+	
+	    </div> <!-- /container -->
+	</div>
+  </body>
+</html>

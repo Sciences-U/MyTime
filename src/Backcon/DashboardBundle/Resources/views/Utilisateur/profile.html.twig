@@ -1,0 +1,9 @@
+{% extends "BackconDashboardBundle::layout.html.twig" %}
+
+{% block page_header %}
+	<h1>Mon compte {% block page_header_action %}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% block fos_user_content %}{% endblock %}
+{% endblock %}

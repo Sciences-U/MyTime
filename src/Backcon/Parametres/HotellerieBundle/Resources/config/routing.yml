@@ -1,0 +1,3 @@
+parametres_hotellerie:
+    pattern:  /
+    defaults: { _controller: BackconParametresHotellerieBundle:Default:index }

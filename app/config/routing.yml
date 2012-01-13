@@ -1,0 +1,36 @@
+BackconParametresInscriptionBundle:
+    resource: "@BackconParametresInscriptionBundle/Resources/config/routing.yml"
+    prefix:   /backcon/parametres/inscription
+
+BackconParametresHotellerieBundle:
+    resource: "@BackconParametresHotellerieBundle/Resources/config/routing.yml"
+    prefix:   /backcon/parametres/hotellerie
+
+BackconParametresPrestationBundle:
+    resource: "@BackconParametresPrestationBundle/Resources/config/routing.yml"
+    prefix:   /backcon/parametres/prestation
+
+BackconParametresReservationBundle:
+    resource: "@BackconParametresReservationBundle/Resources/config/routing.yml"
+    prefix:   /backcon/parametres/reservation
+
+BackconParametresGeneralBundle:
+    resource: "@BackconParametresGeneralBundle/Resources/config/routing.yml"
+    prefix:   /backcon/parametres/general
+
+BackconParametresCongresBundle:
+    resource: "@BackconParametresCongresBundle/Resources/config/routing.yml"
+    prefix:   /backcon/parametres/congres
+
+BackconConnexionBundle:
+    resource: "@BackconConnexionBundle/Resources/config/routing.yml"
+    prefix:   /connexion
+
+BackconDashboardBundle:
+    resource: "@BackconDashboardBundle/Resources/config/routing.yml"
+    prefix:   /backcon/dashboard
+
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal

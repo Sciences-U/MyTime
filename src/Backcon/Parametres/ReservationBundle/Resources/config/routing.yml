@@ -1,0 +1,3 @@
+parametres_reservation:
+    pattern:  /
+    defaults: { _controller: BackconParametresReservationBundle:Default:index }

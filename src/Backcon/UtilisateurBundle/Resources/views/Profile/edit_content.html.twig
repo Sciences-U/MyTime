@@ -1,0 +1,23 @@
+{% form_theme form 'BackconDashboardBundle:Form:fields.html.twig' %}
+
+<div class="span4">
+	<h3>Actions</h3>
+	<dl>
+		<hr>
+		<dd><a href="{{ path('fos_user_profile_edit') }}">Editer</a></dd>
+	</dl>
+</div>
+<div class="span10">
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    
+	<fieldset>
+    	<legend>Compte utilisateur</legend>
+    	{{ form_row(form.user.username, { 'label' : 'Nom d\'utilisateur' }) }}
+    	{{ form_row(form.user.email, { 'label' : 'Email' }) }}     
+        <div class="actions">
+          <input class="btn primary" type="submit" value="Enregistrer" />&nbsp;<button class="btn" type="reset">Cancel</button>
+        </div>
+   	</fieldset>
+</form>
+</div>
+

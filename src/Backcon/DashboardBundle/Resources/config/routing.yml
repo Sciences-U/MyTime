@@ -1,0 +1,16 @@
+dashboard_homepage:
+    pattern:  /
+    defaults: { _controller: BackconDashboardBundle:Default:index }
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+    defaults: {template: 'Dashboard', page_name: 'Mon compte', page_action: ''}  
+    
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register

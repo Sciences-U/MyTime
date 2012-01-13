@@ -1,0 +1,28 @@
+{% extends "BackconDashboardBundle::layout.html.twig" %}
+
+{% block page_header %}
+	<h1>Tableau de bord</h1>
+{% endblock %}
+ 
+{% block content %}
+<div class="span10">
+	<div class="gadget-content">
+		<div class="hero-unit">
+	        <h1>Bienvenue</h1>
+	        <p>Bientôt sur votre tableau de bord la possibilité d'ajouter des gadgets pour vous aider dans la gestion de votre congrès</p>
+	        <!--<p><a class="btn primary large">Learn more »</a></p>-->
+	    </div>
+	</div>
+</div>
+<div class="span4">
+	<h3>Menu rapide</h3>
+	<dl>
+		<hr>
+		<dd><a href="{{ path('parametres_general') }}">Paramètres</a></dd>
+		<hr>
+		<dd>Liste des utilisateurs</dd>
+		<dd>Liste des groupes</dd>
+		<dd>Liste des utilisateurs</dd>
+	</dl>
+</div>
+{% endblock %}

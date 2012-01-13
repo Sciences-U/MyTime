@@ -1,0 +1,65 @@
+{% extends "BackconDashboardBundle::layout.html.twig" %}
+{% form_theme form 'BackconDashboardBundle:Form:fields.html.twig' %}
+
+{% block page_header %}
+	<h1>Paramètres <small>> Congrès (avancé)</small></h1>
+{% endblock %}
+
+{% block content %}
+<div class="span4">
+	<h3>Actions</h3>
+	<dl>
+		<hr>
+		<dd><a href="{{ path('parametres_congres') }}">Congrès</a></dd>
+	</dl>
+</div>
+<div class="span10">
+	{% include 'BackconDashboardBundle:Parametres:menu.html.twig' with {'congres': true} %}
+	<form action="#" method="post" {{ form_enctype(form) }} method="POST" >
+	{% if msgOk is defined %}
+    <div class="alert-message success">
+        <a href="#" class="close">×</a>
+        <p>{{ msgOk }}</p>
+    </div>
+    {% elseif msgErr is defined %}
+    <div class="alert-message error">
+        <a href="#" class="close">×</a>
+        <p>{{ msgErr }}</p>
+    </div>
+    {% endif %} 
+	<fieldset>
+	    <legend>Paramètres de connexion à Partners</legend>
+    	{{ form_row(form.url, { 'label' : 'Url' }) }}
+    	{{ form_row(form.login, { 'label' : 'Identifiant' }) }}
+    	{{ form_row(form.password, { 'label' : 'Mot de passe' }) }}
+    </fieldset>
+    <fieldset>
+	    <legend>Debugage (Développeurs seulement)</legend>
+	    <div class="clearfix">
+            <div class="input">
+              <ul class="inputs-list">
+		        <li>
+		          <label>
+		            {{ form_widget(form.trace) }}
+		            <span>Activer la trace WSDL</span>
+		          </label>
+		        </li>
+		        <li>
+		          <label>
+		            {{ form_widget(form.debug) }}
+		            <span>Activer le debugage par proxy</span>
+		          </label>
+		        </li>
+		      </ul>
+		    </div>
+		</div>
+    	{{ form_row(form.proxyHost, { 'label' : 'Adresse Proxy' }) }}
+    	{{ form_row(form.proxyPort, { 'label' : 'Port proxy' }) }}
+	    <div class="actions">
+          <input class="btn primary" type="submit" value="Enregistrer les modifications" />
+        </div>
+    </fieldset>
+	</form>
+</form>
+</div>
+{% endblock %}

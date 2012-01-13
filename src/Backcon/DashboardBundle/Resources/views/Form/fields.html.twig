@@ -1,0 +1,58 @@
+{% extends 'FOSUserBundle::form.html.twig' %}
+
+{% block field_label %}
+	{% spaceless %}
+	    <label for="{{ id }}">{{ label.nom }}
+
+    {% if required %}
+        <span class="required" title="Ce champ est requis">*</span>
+    {% endif %}
+    	</label>
+	{% endspaceless %}
+{% endblock %}
+
+{% block field_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        {% for error in errors %}
+    <br />
+    <span class="help-inline">
+        {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+    </span>
+        {% endfor %}
+    {% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
+
+{% block date_row %}
+{% spaceless %}
+	<div class="clearfix{% if errors|length > 0 %} error{% endif %}">
+        {{ form_label(form, { 'nom' : label }) }}
+        <div class="input ">
+        {% if errors|length > 0 %}
+	        {{ form_widget(form, { 'attr': {'class': 'error span2', 'data-datepicker' : 'datepicker'} }) }}
+	    {% else %}
+	        {{ form_widget(form, { 'attr': {'class': 'span2', 'data-datepicker' : 'datepicker'} }) }}
+	    {% endif %}
+	        {{ form_errors(form) }}
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock date_row %}
+
+{% block field_row %}
+{% spaceless %}
+	<div class="clearfix{% if errors|length > 0 %} error{% endif %}">
+        {{ form_label(form, { 'nom' : label }) }}
+        <div class="input">
+        {% if errors|length > 0 %}
+	        {{ form_widget(form, { 'attr': {'class': 'error'} }) }}
+	    {% else %}
+	        {{ form_widget(form) }}
+	    {% endif %}
+	        {{ form_errors(form) }}
+        </div>
+        {{ form_rest(form) }}
+    </div>
+{% endspaceless %}
+{% endblock field_row %}

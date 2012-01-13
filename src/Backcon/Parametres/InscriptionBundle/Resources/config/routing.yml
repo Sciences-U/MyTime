@@ -1,0 +1,3 @@
+parametres_inscription:
+    pattern:  /
+    defaults: { _controller: BackconParametresInscriptionBundle:Default:index }

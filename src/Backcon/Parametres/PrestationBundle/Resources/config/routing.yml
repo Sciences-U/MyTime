@@ -1,0 +1,3 @@
+parametres_prestation:
+    pattern:  /
+    defaults: { _controller: BackconParametresPrestationBundle:Default:index }

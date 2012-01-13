@@ -1,0 +1,29 @@
+parametres_general:
+    pattern:  /
+    defaults: { _controller: BackconParametresGeneralBundle:Default:index }
+
+parametres_general_utilisateurs:
+    pattern:  /utilisateurs
+    defaults: { _controller: BackconParametresGeneralBundle:Utilisateurs:index }
+    
+parametres_general_utilisateurs_lister:
+    pattern:  /utilisateurs/lister/{max}
+    defaults: { _controller: BackconParametresGeneralBundle:Utilisateurs:lister, max: 15 }
+    
+parametres_general_utilisateurs_nouveau:
+    pattern:  /utilisateurs/nouveau
+    defaults: { _controller: BackconParametresGeneralBundle:Utilisateurs:ajouter }
+    requirements:
+        _method:  POST
+        
+parametres_general_utilisateurs_supprimer:
+    pattern:  /utilisateurs/supprimer
+    defaults: { _controller: BackconParametresGeneralBundle:Utilisateurs:supprimer }
+    requirements:
+        _method:  POST
+   
+parametres_general_utilisateurs_etat:
+    pattern:  /utilisateurs/etat
+    defaults: { _controller: BackconParametresGeneralBundle:Utilisateurs:etat }
+    requirements:
+        _method:  POST

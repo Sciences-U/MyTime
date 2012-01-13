@@ -1,0 +1,7 @@
+parameters:
+#    backcon_connexion.example.class: Backcon\ConnexionBundle\Example
+
+services:
+#    backcon_connexion.example:
+#        class: %backcon_connexion.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

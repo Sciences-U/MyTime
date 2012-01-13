@@ -1,0 +1,252 @@
+{% extends "BackconDashboardBundle::layout.html.twig" %}
+{% form_theme form 'BackconDashboardBundle:Form:fields.html.twig' %}
+
+{% block page_header %}
+	<h1>Paramètres <small>> Général (utilisateurs)</small></h1>
+{% endblock %}
+
+{% block content %}
+<div class="span4">
+	<h3>Actions</h3>
+	<dl>
+		<hr>
+		<dd><a href="{{ path('parametres_general') }}">Général</a></dd>
+	</dl>
+</div>
+<div class="span10">
+	{% include 'BackconDashboardBundle:Parametres:menu.html.twig' with {'general': true} %}
+	<script >
+	$(function() {				
+		$("#ajoutUtilisateur").click(function(){
+			$("#btnCreerUtilisateur").button('reset');
+			$("#formUtilisateur").modal('show');
+			effacerErreurs('formUtilisateur');
+			return false;
+		});
+		
+	   	$("#nouveauUtilisateur").submit(function(){
+	   		var active = 0;
+	   		if($("#form_active").is(':checked'))
+	   			active = 1;
+	   		
+	   		if(!loaderManager.lock('nouveau_utilisteur')){	
+		       	$.ajax({
+					url: $("#nouveauUtilisateur").attr("action"),
+					global: false,
+					type: "POST",
+					data: {
+			           	username:$("#form_username").val(),
+			           	password:$("#form_password").val(),
+			           	email:$("#form_email").val(),
+			           	active:active
+			       	},
+					dataType: "json",
+					async:true,
+					success: function(data) {
+						$("#btnCreerUtilisateur").button('reset');
+						$("#alertOk").hide();
+						$("#alertErr").hide();
+						effacerErreurs('formUtilisateur');
+						
+						if(data.response==200 ){  
+							$('#msgOk').html('Un nouvel utilisateur a été ajouté');         
+			            	$("#alertOk").fadeIn();
+			                $("#formUtilisateur").modal('hide');
+			                $("#lesUtilisateur").html('<div style="margin:50px; text-align:center;"><img src="{{ asset('bundles/backcondashboard/images/loader.gif') }}" alt="Chargement ..." /></div>');
+			                $.post(data.url, {}, function(contenuHtml){
+			                	$("#lesUtilisateur").css({'display':'none'});
+			                	$("#lesUtilisateur").html(contenuHtml);
+			                	$("#lesUtilisateur").slideDown();
+			                });
+			            } else if(data.response==400){
+				            $.each(data.erreurs, function(){
+				               	$("#"+this.id).addClass('error');
+				               	$("#"+this.id).parents('.clearfix').addClass('error');
+				               	$("#"+this.id).parents('.input').append('<div class="txtErreur"><span class="help-inline">'+this.msg+'</span></div>');
+				            });
+			          	} else if(data.response==500){
+			          		$("#formUtilisateur").modal('hide');
+			               	$('#msgErreur').html(data.erreur);
+							$("#alertErr").fadeIn();
+			          	} else {
+			          		$("#formUtilisateur").modal('hide');
+			          		$('#msgErreur').html("<strong>Oops !</strong> Une erreur s'est survenue au niveau du serveur");
+			          		$("#alertErr").fadeIn();
+			          	}
+					},
+					error: function(){
+						$("#formUtilisateur").modal('hide');
+						$('#msgErreur').html("<strong>Oops !</strong> Une erreur s'est survenue au niveau du serveur");
+			          	$("#alertErr").fadeIn();
+					},
+					complete: function(){
+						loaderManager.delock('nouveau_utilisteur');
+					}
+				});
+			}
+	       	
+	      	return false;
+	   	});
+	});
+	
+	var keylist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPKRSTUVWXYZ123456789";
+	var temp = '';
+	
+	function generatepass(plength){
+		temp = '';
+		for (i=0;i<plength;i++)
+			temp += keylist.charAt(Math.floor(Math.random()*keylist.length));
+		return temp;
+	}
+	
+	function etat(element,etat){
+		if(!loaderManager.lock('etat_'+element.parents('tr').attr('id')+'_'+etat)){
+			loaderManager.show();
+			$.ajax({
+				url: '{{ path('parametres_general_utilisateurs_etat') }}',
+				global: false,
+				type: "POST",
+				data: {
+		           	username:element.parents('tr').children('td:first').text(),
+		           	etat:etat
+		       	},
+				dataType: "json",
+				async:true,
+				success: function(data) {
+					if(data.response==200){ 
+						loaderManager.hide();
+						if(data.etat){
+							if(!data.expire)
+								element.parents('tr').removeClass('red');
+							element.children('img').attr({'src':'{{ asset('bundles/backcondashboard/images/active.png') }}'});
+							element.attr({'href':'#desactive'});
+						} else {
+							element.parents('tr').addClass('red');
+							element.children('img').attr({'src':'{{ asset('bundles/backcondashboard/images/desactive.png') }}'});
+							element.attr({'href':'#active'});
+						}
+		            } else if(data.response==500){
+		            	loaderManager.hide(data.erreur);
+		          	} else {
+		          		loaderManager.hide("<strong>Oops !</strong> Une erreur s'est survenue au niveau du serveur");
+		          	}
+				},
+				error: function(){
+					loaderManager.hide("<strong>Oops !</strong> Une erreur s'est survenue au niveau du serveur");
+				},
+				complete: function(){
+					loaderManager.delock('etat_'+element.parents('tr').attr('id')+'_'+etat);
+				}
+			});
+		}
+	}
+	
+	function supprimer(id){
+		if(!loaderManager.lock('supprimer_'+id)){
+			loaderManager.show();
+			$('#'+id+'_loader').css({'display':'inline-block'});
+			$.ajax({
+				url: '{{ path('parametres_general_utilisateurs_supprimer') }}',
+				global: false,
+				type: "POST",
+				data: {
+		           	username:$("#"+id+" td:first").text()
+		       	},
+				dataType: "json",
+				async:true,
+				success: function(data) {
+					loaderManager.hide();
+					if(data.response==200 ){ 
+						$('#msgOk').html('L\'utilisateur <strong>'+$("#"+id+" td:first").text()+'</strong> a été supprimé');           
+		            	$("#alertOk").fadeIn();
+		            	$('#'+id).next().remove();
+		            	$('#'+id).remove();
+		            	$("table#tableUtilisateurs").trigger("update");
+		            } else if(data.response==500){
+		               	$('#msgErreur').html(data.erreur);
+						$("#alertErr").fadeIn();
+		          	} else {
+		          		$('#msgErreur').html("<strong>Oops !</strong> Une erreur s'est survenue au niveau du serveur");
+		          		$("#alertErr").fadeIn();
+		          	}
+				},
+				error: function(){
+					loaderManager.hide();
+					$('#msgErreur').html("<strong>Oops !</strong> Une erreur s'est survenue au niveau du serveur");
+		          	$("#alertErr").fadeIn();
+				},
+				complete: function(){
+					loaderManager.delock('supprimer_'+id);
+				}
+			});
+		}
+	}
+	
+	function annuler(id){
+		$('#'+id).next().remove();
+		$('#'+id).removeClass('yellow');
+	}
+	</script>
+	<fieldset>
+		<legend>Liste des utilisateurs</legend>
+		
+		<div id="alertOk" class="alert-message success fade in" style="display: none;">
+	        <a href="#" class="close">×</a>
+	        <p id="msgOk"></p>
+	    </div>
+	    
+	    <div id="alertErr" class="alert-message error fade in" style="display: none;">
+	        <a href="#" class="close">×</a>
+	        <p id="msgErreur"></p>
+	    </div>
+	    
+		<p>
+			<button id="ajoutUtilisateur" class="btn primary rigth" data-controls-modal="formUtilisateur" data-keyboard="true" data-backdrop="true">Ajouter un utilisateur</button>
+			<div style="clear: both"></div>
+		</p>
+		
+		<div class="modal hide fade" id="formUtilisateur" style="display: none;">
+		  <form id="nouveauUtilisateur" action="{{path('parametres_general_utilisateurs_nouveau')}}" method="POST" style="margin:0;" onSubmit="return false;">
+	        <div class="modal-header">
+	          <a class="close" href="#">×</a>
+	          <h3>Ajouter un utilisateur</h3>
+	        </div>
+	        <div class="modal-body">
+	          <p>
+				{{ form_row(form.username, { 'label' : 'Nom d\'utilisateur' }) }}
+				<div class="clearfix">
+	              <label for="form_password">Mot de passe <span title="Ce champ est requis" class="required">*</span></label>
+	              <div class="input">
+	                {{ form_widget(form.password) }}
+	                <button class="btn" onclick="$('#form_password').val(generatepass(8)); return false;">Générer</button>
+	              </div>
+	            </div>
+				{{ form_row(form.password, { 'label' : 'Mot de passe', 'class' : 'span3' }) }}
+				{{ form_row(form.email, { 'label' : 'Email' }) }}
+				<div class="clearfix">
+		            <div class="input">
+		              <ul class="inputs-list">
+				        <li>
+				          <label>
+				            <input type="checkbox" value="1" id="form_active" name="form_active" checked="checked">
+				            <span>Activer le compte</span>
+				          </label>
+				        </li>
+				      </ul>
+				    </div>
+				</div>
+	          </p>
+	        </div>
+	        <div class="modal-footer">
+	          <button id="btnCreerUtilisateur" class="btn primary" onclick="$(this).button('loading'); $('#nouveauUtilisateur').submit(); return false;" data-loading-text="Sauvegarde ...">Créer l'utilisateur</button>
+	        </div>
+	      </form>
+	    </div>
+		
+		<div id="lesUtilisateur">
+		{% render "BackconParametresGeneralBundle:Utilisateurs:lister" with {'max': 15} %}
+		</div>
+	 </fieldset>
+</form>
+</div>
+{% endblock %}

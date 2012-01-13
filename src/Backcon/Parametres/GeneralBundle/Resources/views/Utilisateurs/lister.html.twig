@@ -1,0 +1,80 @@
+		  <table id="tableUtilisateurs" class="bordered-table zebra-striped">
+	        <thead>
+	          <tr>
+	            <th class="header">Identifiant</th>
+	            <th class="header">Email</th>
+	            <th class="header">Actions</th>
+	            <th class="header">Etat</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	        {% for user in users %}
+	        <tr{% if user.locked or not user.enabled %} class="red"{% endif %} id="user{{ user.id }}">
+	            <td>{{ user.username }}</td>
+	            <td>{{ user.email }}</td>
+	            <td>
+	            	<a href="#supprimer" rel='twipsy' title='Cliquez pour supprimer'>
+	            		<img src="{{ asset('bundles/backcondashboard/images/supprimer.png') }}" alt="Verouillé" width="16" height="16" />
+	            	</a>
+	            	{% if user.locked %}
+	            		<span style="display:none">b</span>
+	            		<a href="#deverrouiller" rel='twipsy' title='Cliquez pour déverrouiller'>
+	            			<img src="{{ asset('bundles/backcondashboard/images/verrou.png') }}" alt="Verouillé" width="16" height="16" />
+	            		</a>
+	            	{% else %}
+	            		<span style="display:none">a</span>
+	            		<a href="#verrouiller" rel='twipsy' title='Cliquez pour verrouiller'>
+	            			<img src="{{ asset('bundles/backcondashboard/images/verrou_ouvert.png') }}" alt="Déverouillé" width="16" height="16" />
+	            		</a>
+	            	{% endif %}
+	           	</td>
+	            <td>
+	            	{% if user.enabled %}
+	            		<span style="display:none">a</span>
+	            		<a href="#desactive" rel='twipsy' title='Compte activé'>
+	            			<img src="{{ asset('bundles/backcondashboard/images/active.png') }}" alt="Activé" width="16" height="16" />
+	            		</a>
+	            	{% else %}
+	            		<span style="display:none">b</span>
+	            		<a href="#active" rel='twipsy' title='Compte désactivé'>
+	            			<img src="{{ asset('bundles/backcondashboard/images/desactive.png') }}" alt="Desactivé" width="16" height="16" />
+	            		</a>
+	            	{% endif %}
+	            	{% if user.expired %}
+	            	<a href="#" rel='twipsy' title='Compte expiré le {{ user.timeExpired }}'>
+	            		<img src="{{ asset('bundles/backcondashboard/images/timer_a_expirer.png') }}" alt="Expiré" width="16" height="16" />
+	            	</a>
+	            	{% elseif user.accountGoingExpired %}
+	            		<img src="{{ asset('bundles/backcondashboard/images/timer_va_expirer.png') }}" alt="Va expiré" width="16" height="16" />
+	            	{% endif %}
+	            </td>
+	        </tr>
+	        {% endfor %}
+			</tbody>
+	      </table>
+	      <script>
+	      	$("table#tableUtilisateurs").tablesorter({ sortList: [[0,0]] });
+	      	$("a[rel=twipsy]").twipsy({ live: true }).click(function(){ 
+				var ligne = $(this).parents('tr');
+				var id = ligne.attr('id');
+	      		if($(this).attr('href') == '#supprimer'){
+	      			$("table#tableUtilisateurs").bind("sortStart",function() { 
+	      				var ligneClass = ligne.attr('class');
+				        $(".suppressionAlertMessage").each(function(){
+				        	$(this).prev().removeClass('yellow');
+				        	$(this).remove();
+				        }); 
+				        $("table#tableUtilisateurs").trigger("update");
+				        $('#foo').unbind("sortStart");
+				    });
+					ligne.addClass('yellow');
+					ligne.after('<tr class="suppressionAlertMessage"><td colspan="4"><div data-alert="alert" class="alert-message block-message warning fade in"><p><strong>Attention :</strong> Etes vous certain de vouloir supprimer définitivement ce compte ?</p><div class="alert-actions"><a href="#" onclick="supprimer(\''+id+'\'); return false;" class="btn small">Supprimer</a> <a href="#" onclick="annuler(\''+id+'\'); return false;" class="btn small">Annuler</a> <span id="'+id+'_loader" style="display:none;"><img src="{{ asset('bundles/backcondashboard/images/loader.gif') }}" alt="Chargement ..." /> Suppression en cours ...</span></div></div></td></tr>');
+					return false;
+				} else if($(this).attr('href') == '#desactive'){
+					etat($(this),0);
+				} else if($(this).attr('href') == '#active'){
+					etat($(this),1);
+				} else
+					return false;
+			});
+	      </script>

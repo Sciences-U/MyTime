@@ -1,0 +1,7 @@
+parametres_congres:
+    pattern: /
+    defaults: { _controller: BackconParametresCongresBundle:Default:index }
+
+parametres_congres_avance:
+    pattern: /avance
+    defaults: { _controller: BackconParametresCongresBundle:Default:avance }

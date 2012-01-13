@@ -1,0 +1,7 @@
+parameters:
+#    backcon_parametres_prestation.example.class: Backcon\Parametres\PrestationBundle\Example
+
+services:
+#    backcon_parametres_prestation.example:
+#        class: %backcon_parametres_prestation.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

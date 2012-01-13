@@ -1,0 +1,29 @@
+{% extends "BackconDashboardBundle::layout.html.twig" %}
+
+{% block page_header %}
+	<h1>Paramètres <small>> Inscription</small></h1>
+{% endblock %}
+
+{% block content %}
+<div class="span4">
+	<h3>Actions</h3>
+	<dl>
+		<hr>
+		<dd><a href="{{ path('fos_user_profile_edit') }}">Editer</a></dd>
+		<hr>
+		<dd>Liste des utilisateurs</dd>
+		<dd>Liste des groupes</dd>
+		<dd>Liste des utilisateurs</dd>
+	</dl>
+</div>
+<div class="span10">
+	{% include 'BackconDashboardBundle:Parametres:menu.html.twig' with {'inscription': true} %}
+	
+	    <div class="actions">
+          <input class="btn primary" type="submit" value="Enregistrer les modifications" />
+        </div>
+    </fieldset>
+	</form>
+</form>
+</div>
+{% endblock %}

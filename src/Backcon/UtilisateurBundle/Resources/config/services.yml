@@ -1,0 +1,7 @@
+parameters:
+#    backcon_utilisateur.example.class: Backcon\UtilisateurBundle\Example
+
+services:
+#    backcon_utilisateur.example:
+#        class: %backcon_utilisateur.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

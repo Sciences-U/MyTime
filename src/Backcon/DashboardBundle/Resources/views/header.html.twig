@@ -1,0 +1,22 @@
+<div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="{{ path('dashboard_homepage') }}">{{ glob_nom_congres }}</a>
+          <ul class="nav">
+            <li><a href="#">R&eacute;servations</a></li>
+            <li><a href="#about">Prestations</a></li>
+            <li><a href="#contact">H&ocirc;tellerie</a></li>
+            <li><a href="#contact">Inscriptions</a></li>
+          </ul>
+          <form action="{{ path('fos_user_security_logout') }}" class="pull-right">
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			    <a class="input-small" href="{{ path('fos_user_profile_show') }}">Connect&eacute; : {{ app.user ? app.user.username : 'Anonyme' }}</a>&nbsp;&nbsp;&nbsp;
+			{% else %}
+			    <a class="input-small" href="{{ path('fos_user_security_login') }}">Vous devez vous connecter !</a>&nbsp;&nbsp;&nbsp;
+			{% endif %}
+			
+            <button class="btn danger" type="submit">Se d&eacute;connecter</button>
+          </form>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,7 @@
+parameters:
+#    backcon_parametres_inscription.example.class: Backcon\Parametres\InscriptionBundle\Example
+
+services:
+#    backcon_parametres_inscription.example:
+#        class: %backcon_parametres_inscription.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,18 @@
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+<div class="modal-body">
+	<div class="clearfix">Saisissez votre nom d'utilisateur pour la r&eacute;initialisation de votre mot de passe : </div>	 
+    {% if invalid_username is defined %}
+    	<div class="alert-message error">
+	      <p><strong>Erreur :</strong> Nom d'utilisateur invalide</p>
+	    </div>
+    {% endif %}
+    <div class="clearfix">
+        <label for="username">Nom d'utilisateur</label>
+        <div class="input"><input type="text" id="username" name="username" /></div>
+    </div>
+</div>
+<div class="modal-footer">
+    <input class="btn primary" type="submit" value="R&eacute;initialiser le mot de passe" />
+    <a href="{{ path('fos_user_security_login') }}">Se connecter</a>
+</div>
+</form>

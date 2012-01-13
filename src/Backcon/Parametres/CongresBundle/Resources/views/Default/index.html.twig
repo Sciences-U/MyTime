@@ -1,0 +1,47 @@
+{% extends "BackconDashboardBundle::layout.html.twig" %}
+{% form_theme form 'BackconDashboardBundle:Form:fields.html.twig' %}
+
+{% block page_header %}
+	<h1>Paramètres <small>> Congrès</small></h1>
+{% endblock %}
+
+{% block content %}
+<div class="span4">
+	<h3>Actions</h3>
+	<dl>
+		<hr>
+		<dd><a href="{{ path('parametres_congres_avance') }}">Congrès avancé</a></dd>
+	</dl>
+</div>
+<div class="span10">
+	{% include 'BackconDashboardBundle:Parametres:menu.html.twig' with {'congres': true} %}
+	<form action="#" method="post" {{ form_enctype(form) }} method="POST" >
+	<fieldset>
+	    <legend>Informations sur le congrès</legend>
+	    {% if msgOk is defined %}
+	    <div class="alert-message success">
+	        <a href="#" class="close">×</a>
+	        <p>{{ msgOk }}</p>
+	    </div>
+	    {% elseif msgErr is defined %}
+	    <div class="alert-message error">
+	        <a href="#" class="close">×</a>
+	        <p>{{ msgErr }}</p>
+	    </div>
+	    {% endif %}
+    	{{ form_row(form.nom, { 'label' : 'Nom du congrès' }) }}
+    	{{ form_row(form.dossier, { 'label' : 'Id du dossier Travel' }) }}
+    	{{ form_row(form.dateDebut, { 'label' : 'Date début' }) }}
+    	{{ form_row(form.dateFin, { 'label' : 'Date fin' }) }}
+    	{# form_row(form.logo, { 'label' : 'Logo' }) #}
+    	{{ form_row(form.urlSite, { 'label' : 'Url du site' }) }}
+    	{{ form_row(form.contactMail, { 'label' : 'Email de contact' }) }}
+    	{{ form_row(form.langueDefaut, { 'label' : 'Langue par défaut' }) }}
+	    <div class="actions">
+          <input class="btn primary" type="submit" value="Enregistrer les modifications" />
+        </div>
+    </fieldset>
+	</form>
+</form>
+</div>
+{% endblock %}

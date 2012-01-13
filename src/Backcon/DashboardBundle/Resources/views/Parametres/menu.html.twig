@@ -1,0 +1,8 @@
+<ul class="tabs">
+    <li{% if general is defined %} class="active"{% endif %}><a href="{{ path('parametres_general') }}">Général</a></li>
+    <li{% if congres is defined %} class="active"{% endif %}><a href="{{ path('parametres_congres') }}">Congrès</a></li>
+    <li{% if reservation is defined %} class="active"{% endif %}><a href="{{ path('parametres_reservation') }}">Réservation</a></li>
+    <li{% if prestation is defined %} class="active"{% endif %}><a href="{{ path('parametres_prestation') }}">Prestation</a></li>
+    <li{% if hotellerie is defined %} class="active"{% endif %}><a href="{{ path('parametres_hotellerie') }}">Hôtellerie</a></li>
+    <li{% if inscription is defined %} class="active"{% endif %}><a href="{{ path('parametres_inscription') }}">Inscription</a></li>
+</ul>

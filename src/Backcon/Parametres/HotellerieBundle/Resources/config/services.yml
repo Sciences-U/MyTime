@@ -1,0 +1,7 @@
+parameters:
+#    backcon_parametres_hotellerie.example.class: Backcon\Parametres\HotellerieBundle\Example
+
+services:
+#    backcon_parametres_hotellerie.example:
+#        class: %backcon_parametres_hotellerie.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
