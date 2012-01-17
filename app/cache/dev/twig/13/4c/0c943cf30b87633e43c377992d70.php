@@ -73,33 +73,33 @@ class __TwigTemplate_134c0c943cf30b87633e43c377992d70 extends Twig_Template
 \t            \t";
             }
             // line 30
-            echo "\t           \t</td>
-\t            <td>
-\t            \t";
-            // line 32
+            echo "\t            \t";
             if ($this->getAttribute($this->getContext($context, "user"), "enabled")) {
-                // line 33
+                // line 31
                 echo "\t            \t\t<span style=\"display:none\">a</span>
-\t            \t\t<a href=\"#desactive\" rel='twipsy' title='Compte activé'>
+\t            \t\t<a href=\"#desactive\" rel='twipsy' title='Cliquez pour désactiver'>
 \t            \t\t\t<img src=\"";
-                // line 35
+                // line 33
                 echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/backcondashboard/images/active.png"), "html", null, true);
                 echo "\" alt=\"Activé\" width=\"16\" height=\"16\" />
 \t            \t\t</a>
 \t            \t";
             } else {
-                // line 38
+                // line 36
                 echo "\t            \t\t<span style=\"display:none\">b</span>
-\t            \t\t<a href=\"#active\" rel='twipsy' title='Compte désactivé'>
+\t            \t\t<a href=\"#active\" rel='twipsy' title='Cliquez pour activer'>
 \t            \t\t\t<img src=\"";
-                // line 40
+                // line 38
                 echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/backcondashboard/images/desactive.png"), "html", null, true);
                 echo "\" alt=\"Desactivé\" width=\"16\" height=\"16\" />
 \t            \t\t</a>
 \t            \t";
             }
+            // line 41
+            echo "\t           \t</td>
+\t            <td>
+\t            \t";
             // line 43
-            echo "\t            \t";
             if ($this->getAttribute($this->getContext($context, "user"), "expired")) {
                 // line 44
                 echo "\t            \t<a href=\"#\" rel='twipsy' title='Compte expiré le ";

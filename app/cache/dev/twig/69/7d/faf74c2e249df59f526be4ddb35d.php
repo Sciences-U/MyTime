@@ -56,8 +56,8 @@ class __TwigTemplate_697dfaf74c2e249df59f526be4ddb35d extends Twig_Template
 \t\$(function() {\t\t\t\t
 \t\t\$(\"#ajoutUtilisateur\").click(function(){
 \t\t\t\$(\"#btnCreerUtilisateur\").button('reset');
-\t\t\t\$(\"#formUtilisateur\").modal('show');
-\t\t\teffacerErreurs('formUtilisateur');
+\t\t\t\$(\"#formNouveauUtilisateur\").modal('show');
+\t\t\teffacerErreurs('formNouveauUtilisateur');
 \t\t\treturn false;
 \t\t});
 \t\t
@@ -83,12 +83,12 @@ class __TwigTemplate_697dfaf74c2e249df59f526be4ddb35d extends Twig_Template
 \t\t\t\t\t\t\$(\"#btnCreerUtilisateur\").button('reset');
 \t\t\t\t\t\t\$(\"#alertOk\").hide();
 \t\t\t\t\t\t\$(\"#alertErr\").hide();
-\t\t\t\t\t\teffacerErreurs('formUtilisateur');
+\t\t\t\t\t\teffacerErreurs('formNouveauUtilisateur');
 \t\t\t\t\t\t
 \t\t\t\t\t\tif(data.response==200 ){  
 \t\t\t\t\t\t\t\$('#msgOk').html('Un nouvel utilisateur a été ajouté');         
 \t\t\t            \t\$(\"#alertOk\").fadeIn();
-\t\t\t                \$(\"#formUtilisateur\").modal('hide');
+\t\t\t                \$(\"#formNouveauUtilisateur\").modal('hide');
 \t\t\t                \$(\"#lesUtilisateur\").html('<div style=\"margin:50px; text-align:center;\"><img src=\"";
         // line 55
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/backcondashboard/images/loader.gif"), "html", null, true);
@@ -105,17 +105,17 @@ class __TwigTemplate_697dfaf74c2e249df59f526be4ddb35d extends Twig_Template
 \t\t\t\t               \t\$(\"#\"+this.id).parents('.input').append('<div class=\"txtErreur\"><span class=\"help-inline\">'+this.msg+'</span></div>');
 \t\t\t\t            });
 \t\t\t          \t} else if(data.response==500){
-\t\t\t          \t\t\$(\"#formUtilisateur\").modal('hide');
+\t\t\t          \t\t\$(\"#formNouveauUtilisateur\").modal('hide');
 \t\t\t               \t\$('#msgErreur').html(data.erreur);
 \t\t\t\t\t\t\t\$(\"#alertErr\").fadeIn();
 \t\t\t          \t} else {
-\t\t\t          \t\t\$(\"#formUtilisateur\").modal('hide');
+\t\t\t          \t\t\$(\"#formNouveauUtilisateur\").modal('hide');
 \t\t\t          \t\t\$('#msgErreur').html(\"<strong>Oops !</strong> Une erreur s'est survenue au niveau du serveur\");
 \t\t\t          \t\t\$(\"#alertErr\").fadeIn();
 \t\t\t          \t}
 \t\t\t\t\t},
 \t\t\t\t\terror: function(){
-\t\t\t\t\t\t\$(\"#formUtilisateur\").modal('hide');
+\t\t\t\t\t\t\$(\"#formNouveauUtilisateur\").modal('hide');
 \t\t\t\t\t\t\$('#msgErreur').html(\"<strong>Oops !</strong> Une erreur s'est survenue au niveau du serveur\");
 \t\t\t          \t\$(\"#alertErr\").fadeIn();
 \t\t\t\t\t},
@@ -253,11 +253,11 @@ class __TwigTemplate_697dfaf74c2e249df59f526be4ddb35d extends Twig_Template
 \t    </div>
 \t    
 \t\t<p>
-\t\t\t<button id=\"ajoutUtilisateur\" class=\"btn primary rigth\" data-controls-modal=\"formUtilisateur\" data-keyboard=\"true\" data-backdrop=\"true\">Ajouter un utilisateur</button>
+\t\t\t<button id=\"ajoutUtilisateur\" class=\"btn primary rigth\" data-controls-modal=\"formNouveauUtilisateur\" data-keyboard=\"true\" data-backdrop=\"true\">Ajouter un utilisateur</button>
 \t\t\t<div style=\"clear: both\"></div>
 \t\t</p>
 \t\t
-\t\t<div class=\"modal hide fade\" id=\"formUtilisateur\" style=\"display: none;\">
+\t\t<div class=\"modal hide fade\" id=\"formNouveauUtilisateur\" style=\"display: none;\">
 \t\t  <form id=\"nouveauUtilisateur\" action=\"";
         // line 209
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("parametres_general_utilisateurs_nouveau"), "html", null, true);
@@ -309,12 +309,14 @@ class __TwigTemplate_697dfaf74c2e249df59f526be4ddb35d extends Twig_Template
 \t        </div>
 \t      </form>
 \t    </div>
+\t    
+\t    <div class=\"modal hide fade\" id=\"formModifierUtilisateur\" style=\"display: none;\"></div>
 \t\t
 \t\t<div id=\"lesUtilisateur\">
 \t\t";
-        // line 247
+        // line 249
         echo $this->env->getExtension('actions')->renderAction("BackconParametresGeneralBundle:Utilisateurs:lister", array("max" => 15), array());
-        // line 248
+        // line 250
         echo "\t\t</div>
 \t </fieldset>
 </form>

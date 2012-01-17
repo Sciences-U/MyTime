@@ -118,12 +118,12 @@ class __TwigTemplate_6a96bda086aef3312ade3bf98039a7bd extends Twig_Template
         foreach ($context['_seq'] as $context["key"] => $context["flash"]) {
             // line 50
             echo "\t\t  <div class=\"alert-message block-message ";
-            echo twig_escape_filter($this->env, $this->getContext($context, "flash"), "html", null, true);
-            echo "\">
+            echo twig_escape_filter($this->env, $this->getContext($context, "key"), "html", null, true);
+            echo " fade in\">
 \t\t\t<a class=\"close\" href=\"#\">×</a>
 \t\t\t";
             // line 52
-            echo twig_escape_filter($this->env, $this->getContext($context, "key"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getContext($context, "flash"), "html", null, true);
             echo "
 \t\t  </div>
 \t\t";

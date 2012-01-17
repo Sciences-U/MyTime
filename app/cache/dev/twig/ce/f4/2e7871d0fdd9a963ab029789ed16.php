@@ -19,10 +19,6 @@ class __TwigTemplate_cef42e7871d0fdd9a963ab029789ed16 extends Twig_Template
         // line 5
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("fos_user_profile_edit"), "html", null, true);
         echo "\">Editer</a></dd>
-\t\t<hr>
-\t\t<dd>Liste des utilisateurs</dd>
-\t\t<dd>Liste des groupes</dd>
-\t\t<dd>Liste des utilisateurs</dd>
 \t</dl>
 </div>
 <div class=\"span10\">
@@ -33,7 +29,7 @@ class __TwigTemplate_cef42e7871d0fdd9a963ab029789ed16 extends Twig_Template
             <label>Nom d'utilisateur</label>
             <div class=\"input\">
               <span class=\"uneditable-input\">";
-        // line 19
+        // line 15
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "user"), "username"), "html", null, true);
         echo "</span>
             </div>
@@ -42,7 +38,7 @@ class __TwigTemplate_cef42e7871d0fdd9a963ab029789ed16 extends Twig_Template
             <label>Email</label>
             <div class=\"input\">
               <span class=\"uneditable-input\">";
-        // line 25
+        // line 21
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "user"), "email"), "html", null, true);
         echo "</span>
             </div>
@@ -51,56 +47,56 @@ class __TwigTemplate_cef42e7871d0fdd9a963ab029789ed16 extends Twig_Template
             <label>Etat</label>
             <div class=\"input\">
             ";
-        // line 31
+        // line 27
         if ($this->getAttribute($this->getContext($context, "user"), "enabled")) {
-            // line 32
+            // line 28
             echo "              <span class=\"uneditable-input\">Actif</span>
             ";
         } else {
-            // line 34
+            // line 30
             echo "              <span class=\"uneditable-input\">Inactif</span>
             ";
         }
-        // line 36
+        // line 32
         echo "            </div>
         </div>
         <div class=\"clearfix\">
             <label>Expiration</label>
             <div class=\"input\">
             ";
-        // line 41
+        // line 37
         if ($this->getAttribute($this->getContext($context, "user"), "expired")) {
-            // line 42
+            // line 38
             echo "              <span class=\"uneditable-input\">Expir&eacute;</span>
             ";
         } elseif ($this->getAttribute($this->getContext($context, "user", true), "expiresAt", array(), "any", true, true)) {
-            // line 44
+            // line 40
             echo "              <span class=\"uneditable-input\">expired</span>
             ";
         } else {
-            // line 46
+            // line 42
             echo "              <span class=\"uneditable-input\">Jamais</span>
             ";
         }
-        // line 48
+        // line 44
         echo "            </div>
         </div>
         <div class=\"clearfix\">
         \t<ul class=\"unstyled\">
         \t";
-        // line 52
+        // line 48
         if ($this->getAttribute($this->getContext($context, "user", true), "lastLogin", array(), "any", true, true)) {
-            // line 53
+            // line 49
             echo "        \t\t<li><i>Derni&egrave;re connexion : ";
             echo twig_escape_filter($this->env, twig_date_format_filter($this->getAttribute($this->getContext($context, "user"), "lastLogin"), "d/m/Y H:i:s"), "html", null, true);
             echo "</i></li>
         \t";
         } else {
-            // line 55
+            // line 51
             echo "        \t\t<li><i>Derni&egrave;re connexion : auncune</i></li>
         \t";
         }
-        // line 57
+        // line 53
         echo "        \t</ul>
         </div>
    \t</fieldset>
